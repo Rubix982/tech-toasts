@@ -1,7 +1,7 @@
 ---
-title: "DML Statements"
-metaTitle: "DML Statements"
-metaDescription: "DML Statements"
+title: "SQL Joins & Operators"
+metaTitle: "SQL Joins & Operators"
+metaDescription: "SQL Joins & Operators"
 ---
 
 ## SQL JOIN
@@ -14,7 +14,7 @@ A JOIN clause is used to combine rows from two or more tables, based on a relate
 - [Table Of Contents](#table-of-contents)
 - [Different Types of SQL JOINs](#different-types-of-sql-joins)
 - [SQL INNER JOIN Keyword](#sql-inner-join-keyword)
-  - [**INNER JOIN Syntax**](#inner-join-syntax)
+  - [INNER JOIN Syntax](#inner-join-syntax)
 - [SQL LEFT JOIN Keyword](#sql-left-join-keyword)
 - [SQL RIGHT JOIN Keyword](#sql-right-join-keyword)
 - [Full Joins](#full-joins)
@@ -23,22 +23,17 @@ A JOIN clause is used to combine rows from two or more tables, based on a relate
 
 Here are the different types of the JOINs in SQL:
 
-- **(INNER) JOIN**: Returns records that have matching values in both tables
-- **LEFT (OUTER) JOIN**: Returns all records from the left table, and the matched records from the right table
-- **RIGHT (OUTER) JOIN**: Returns all records from the right table, and the matched records from the left table
-- **FULL (OUTER) JOIN**: Returns all records when there is a match in either left or right table
-
-![SQL INNER JOIN](media/image1.gif)
-![SQL LEFT JOIN](media/image2.gif)
-![SQL RIGHT JOIN](media/image3.gif)
-![SQL FULL OUTER JOIN](media/image4.gif)
+- (INNER) JOIN: Returns records that have matching values in both tables
+- LEFT (OUTER) JOIN: Returns all records from the left table, and the matched records from the right table
+- RIGHT (OUTER) JOIN: Returns all records from the right table, and the matched records from the left table
+- FULL (OUTER) JOIN: Returns all records when there is a match in either left or right table
 
 ## [SQL INNER JOIN Keyword](https://www.w3schools.com/sql/sql_join_inner.asp)
 
 The INNER JOIN keyword selects records that have matching values in both
 tables.
 
-### **INNER JOIN Syntax**
+### INNER JOIN Syntax
 
 ```sql
 SELECT column_name(s)
@@ -47,7 +42,7 @@ INNER JOIN table2
   ON table1.column_name = table2.column_name;
 ```
 
-**Example:**
+Example,
 
 ```sql
 SELECT first_name, last_name, employees.department_id, departments.department_id,  department_name
@@ -90,11 +85,7 @@ SELECT t1.emp_id, t1.emp_name, t1.hire_date, t2.dept_name
 ON t1.dept_id = t2.dept_id ORDER BY emp_name;
 ```
 
-The following example updates the **stock** table by increasing
-the **unit_price** value by 10% for a subset of prices. The WHERE clause
-specifies which prices to increase by applying the IN operator to the
-rows returned by a subquery that selects only the rows of
-the **stock** table where the **unit_price** value is less than 75.
+The following example updates the stock table by increasing the unit_price value by 10% for a subset of prices. The WHERE clause specifies which prices to increase by applying the IN operator to the rows returned by a subquery that selects only the rows of the stock table where the unit_price value is less than 75.
 
 ```sql
 UPDATE stock SET unit_price = unit_price * 1.1
