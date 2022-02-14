@@ -1,0 +1,563 @@
+---
+title: "Solution"
+metaTitle: "Solution"
+metaDescription: "Solution"
+---
+
+## Solution
+
+```sql
+SELECT
+  *
+FROM
+  Worker
+INTERSECT
+SELECT
+  *
+FROM
+  Title;
+  CREATE TABLE Worker (
+    WORKER_ID NUMBER(10) constraint p_k primary key,
+    FIRST_NAME VARCHAR(20),
+    LAST_NAME VARCHAR(20),
+    SALARY NUMBER(20),
+    JOINING_DATE date,
+    DEPARTMENT VARCHAR(20)
+  );
+
+INSERT INTO
+  Worker
+VALUES(
+    001,
+    'Dr Zulfqar',
+    'Memon',
+    100000,
+    '14-FEB-20',
+    'SE'
+  );
+
+INSERT INTO
+  Worker
+VALUES(
+    002,
+    'Dr Atif ',
+    'Tahir',
+    80000,
+    '14-JUN-11',
+    'CS'
+  );
+
+INSERT INTO
+  Worker
+VALUES(
+    003,
+    'Ms Anum',
+    'Quarshi',
+    300000,
+    '14-FEB-20',
+    'SE'
+  );
+
+INSERT INTO
+  Worker
+VALUES(
+    004,
+    'Ms Tania',
+    'Ali',
+    500000,
+    '14-FEB-20',
+    'CS'
+  );
+
+INSERT INTO
+  Worker
+VALUES(
+    005,
+    'Ms Farah',
+    'Sadia',
+    500000,
+    '14-JUN-11',
+    'CS'
+  );
+
+INSERT INTO
+  Worker
+VALUES(
+    006,
+    'Muhammad Nadeem',
+    'Ghouri',
+    200000,
+    '14-JUN-11',
+    'AI'
+  );
+
+INSERT INTO
+  Worker
+VALUES(
+    007,
+    'Muhammad Faheem',
+    'Mughal',
+    75000,
+    '14-JAN-20',
+    'AI'
+  );
+
+INSERT INTO
+  Worker
+VALUES(008, 'Fazad', 'Ahmed', 90000, '14-APR-11', 'CS');
+CREATE TABLE Bonus (
+    WORKER_REF_ID NUMBER(10),
+    BONUS_AMOUNT NUMBER(10),
+    BONUS_DATE DATE,
+    CONSTRAINT F_KEY FOREIGN KEY (WORKER_REF_ID) REFERENCES Worker(WORKER_ID)
+  );
+
+INSERT INTO
+  Bonus
+VALUES(001, 5000, '16-FEB-20');
+
+INSERT INTO
+  Bonus
+VALUES(002, 3000, '16-JUN-11');
+
+INSERT INTO
+  Bonus
+VALUES(003, 4000, '16-FEB-20');
+
+INSERT INTO
+  Bonus
+VALUES(001, 4500, '16-FEB-20');
+
+INSERT INTO
+  Bonus
+VALUES(002, 3500, '16-JUN-11');
+CREATE TABLE Title (
+    WORKER_REF_ID NUMBER(10),
+    WORKER_TITLE VARCHAR(20),
+    AFFECTED_FROM DATE,
+    FOREIGN KEY (WORKER_REF_ID) REFERENCES Worker(WORKER_ID)
+  );
+
+INSERT INTO
+  Title
+VALUES(001, 'Manager', '20-FEB-2016');
+
+INSERT INTO
+  Title
+VALUES(002, 'Executive', '11-JUN-2016');
+
+INSERT INTO
+  Title
+VALUES(008, 'Executive', '11-JUN-2016');
+
+INSERT INTO
+  Title
+VALUES(005, 'Manager', '11-JUN-2016');
+
+INSERT INTO
+  Title
+VALUES(004, 'Asst. Manager', '11-JUN-2016');
+
+INSERT INTO
+  Title
+VALUES(007, 'Executive', '11-JUN-2016');
+
+INSERT INTO
+  Title
+VALUES(006, 'Lead', '11-JUN-2016');
+
+INSERT INTO
+  Title
+VALUES(003, 'Lead', '11-JUN-2016');
+
+SELECT
+  *
+FROM
+  Worker
+INTERSECT
+SELECT
+  *
+FROM
+  Title;
+
+SELECT
+  SALARY
+FROM
+  Worker;
+
+SELECT
+  SALARY
+FROM
+  Worker
+ORDER BY
+  SALARY DESC;
+
+SELECT
+  SALARY
+FROM
+  Worker
+ORDER BY
+  SALARY DESC
+WHERE
+  ROWNUM = 2;
+
+SELECT
+  TOP 10 SALARY
+FROM
+  Worker
+ORDER BY
+  SALARY DESC;
+
+SELECT
+  SALARY
+FROM
+  Worker
+ORDER BY
+  SALARY DESC;
+
+SELECT
+  SALARY
+FROM
+  Worker
+ORDER BY
+  SALARY DESC
+LIMIT
+  1, 2;
+
+SELECT
+  SALARY
+FROM
+  Worker
+ORDER BY
+  SALARY DESC
+LIMIT
+  1 OFFSET 1;
+
+SELECT
+  *
+FROM
+  (
+    SELECT
+      SALARY ROW_NUMBER() OVER(
+        ORDER BY
+          SALARY DESC
+      ) AS ROW
+    FROM
+      Worker
+  ) AS TMP
+WHERE
+  ROW = 2;
+
+SELECT
+  *
+FROM
+  (
+    SELECT
+      SALARY,
+      ROW_NUMBER() OVER(
+        ORDER BY
+          SALARY DESC
+      ) AS ROW
+    FROM
+      Worker
+  ) AS TMP
+WHERE
+  ROW = 2;
+
+SELECT
+  SALARY,
+  ROW_NUMBER() OVER(
+    ORDER BY
+      SALARY DESC
+  ) AS ROW
+FROM
+  Worker
+WHERE
+  ROW = 2;
+
+SELECT
+  *
+FROM
+  (
+    SELECT
+      SALARY,
+      ROW_NUMBER() OVER(
+        ORDER BY
+          SALARY DESC
+      ) AS ROW
+    FROM
+      Worker
+  ) AS TMP
+WHERE
+  ROW = 2;
+
+SELECT
+  *
+FROM
+  Worker
+INTERSECT
+SELECT
+  *
+FROM
+  Title;
+
+SELECT
+  *
+FROM
+  Worker W
+  JOIN Title T ON W.WORKER_ID = T.WORKER_REF_ID;
+
+SELECT
+  TOP 50 PERCENT *
+FROM
+  Worker;
+
+SELECT
+  TOP 50 PERCENT * AS TOP_50
+FROM
+  Worker;
+
+SELECT
+  TOP 50 PERCENT *
+FROM
+  Worker;
+
+SELECT
+  WORKER_TITLE,
+  COUNT(*) AS TOTAL_ROWS
+FROM
+  Title
+GROUP BY
+  WORKER_TITLE
+HAVING
+  TOTAL_ROWS < 5;
+
+SELECT
+  WORKER_TITLE
+FROM
+  Title T
+GROUP BY
+  WORKER_TITLE
+HAVING
+  COUNT(*) < 5;
+
+SELECT
+  WORKER_TITLE,
+  COUNT(*)
+FROM
+  Title T
+GROUP BY
+  WORKER_TITLE
+HAVING
+  COUNT(*) < 5;
+
+SELECT
+  WORKER_TITLE,
+  COUNT(8)
+FROM
+  Title T
+GROUP BY
+  WORKER_TITLE;
+
+SELECT
+  *
+FROM
+  TABLE_1
+ORDER BY
+  ID DESC
+LIMIT
+  1;
+
+SELECT
+  *
+FROM
+  WORKER
+ORDER BY
+  WORKER_ID DESC
+LIMIT
+  1;
+
+SELECT
+  *
+FROM
+  Worker
+ORDER BY
+  WORKER_ID DESC
+WHERE
+  ROWNUM <= 1;
+
+SELECT
+  *
+FROM
+  Worker;
+
+SELECT
+  *
+FROM
+  Worker;
+
+ORDER BY
+  WORKER_ID DESC;
+
+SELECT
+  *
+FROM
+  Worker;
+
+ORDER BY
+  WORKER_ID ASC;
+
+SELECT
+  *
+FROM
+  Worker;
+
+ORDER BY
+  WORKER_ID DESC;
+
+SELECT
+  TOP 1 *
+FROM
+  Worker
+ORDER BY
+  WORKER_ID DESC;
+
+SELECT
+  *
+FROM
+  Worker
+ORDER BY
+  WORKER_ID DESC
+LIMIT
+  1;
+
+select
+  *
+from
+  Worker
+where
+  ROWNUM = 1
+order by
+  WORKER_ID desc;
+
+SELECT
+  *
+LIMIT
+  1, 1
+FROM
+  Worker;
+
+SELECT
+  *
+FROM
+  Worker
+LIMIT
+  1, 1;
+
+SELECT
+  *
+FROM
+  Worker
+WHERE
+  ROWNUM = 1;
+
+SELECT
+  *
+FROM
+  Worker
+ORDER BY
+  WORKER_ID DESC
+LIMIT
+  1, 5;
+
+SELECT
+  *
+FROM
+  Worker
+WHERE
+  ROWNUM = ANY(1, 2, 3, 4, 5)
+ORDER BY
+  WORKER_ID DESC;
+
+SELECT
+  FIRST_NAME,
+  LAST_NAME
+FROM
+  EMPLOYEES
+WHERE
+  SALARY = ALL(
+    SELECT
+      MAX(SALARY)
+    FROM
+      EMPLOYEES
+    GROUP BY
+      DEPARTMENT_ID
+  );
+
+SELECT
+  FIRST_NAME
+FROM
+  Worker
+WHERE
+  SALARY = ALL(
+    SELECT
+      MAX(SALARY)
+    FROM
+      Worker
+    GROUP BY
+      DEPARTMENT
+  );
+
+SELECT
+  SALARY
+FROM
+  Worker W
+WHERE
+  ROWNUM IN (1, 2, 3)
+ORDER BY
+  SALARY DESC;
+
+SELECT
+  SALARY
+FROM
+  Worker W
+WHERE
+  ROWNUM IN (1, 2, 3)
+ORDER BY
+  SALARY ASC;
+
+SELECT
+  DEPARTMENT
+FROM
+  Worker W
+GROUP BY
+  DEPARTMENT,
+  SUM(SALARY);
+
+SELECT
+  DEPARTMENT
+FROM
+  Worker W
+GROUP BY
+  DEPARTMENT,
+  SUM(SALARY);
+
+SELECT
+  DEPARTMENT,
+  SUM(SALARY)
+FROM
+  Worker W
+GROUP BY
+  DEPARTMENT;
+
+SELECT
+  FIRST_NAME,
+  LAST_NAME,
+  SALARY
+FROM
+  Worker W
+ORDER BY
+  SALARY DESC;
+
+
+```
