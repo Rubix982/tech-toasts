@@ -4,7 +4,11 @@ metaTitle: "SQL Joins & Operators"
 metaDescription: "SQL Joins & Operators"
 ---
 
-## SQL JOIN
+## Testing
+
+Testing
+
+<!-- ## SQL JOIN
 
 A JOIN clause is used to combine rows from two or more tables, based on a related column between them.
 
@@ -92,4 +96,4 @@ UPDATE stock SET unit_price = unit_price * 1.1
   WHERE unit_price IN (
     SELECT unit_price FROM stock WHERE unit_price < 75
   );
-```
+``` -->
