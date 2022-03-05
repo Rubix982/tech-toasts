@@ -77,7 +77,3 @@ You can select fields and on which to enable Field History Tracking.
 2. **Elements**: Under the Toolbox, you'll find Elements. These are the building blocks to create each step of your flow on the canvas. Be aware that the flow type determines which elements are available in your Toolbox. There are three main types.
 3. **Manager**: Under the Toolbox, you'll also find the Manager tab. This consists of all the elements and resources found in your flow. By clicking on each resource, you can also see the relationship between them and the flow
 4. **Button Bar**: Here shows all the important information
-
-## Salesforce Flow (Hands-On)
-
-
