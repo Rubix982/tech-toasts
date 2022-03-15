@@ -15,6 +15,7 @@ metaDescription: "Data Analytics, Business Benefits, Smart Services"
   - [Increasing Local Efficiency](#increasing-local-efficiency)
   - [The Traditional IT Cloud And Computing Model](#the-traditional-it-cloud-and-computing-model)
 - [Fog Computing](#fog-computing)
+- [Edge Computing](#edge-computing)
 
 ## Data Analytics, Business Benefits, Smart Services
 
@@ -38,23 +39,43 @@ This model has limitations. These requirements tend to bring the need for data a
 
 ### Minimizing Latency
 
+Analyzing data close to the device that collected the data can make a difference between averting disaster and a cascading system failure
+
 ### Conserving Network Bandwidths
 
+It is not practical to transport vast amounts of data from thousands or hundreds of thousands of edge devices to the cloud.
+
+It is not even necessary because many critical analyses does not require cloud-scale processing and storage.
+
 ### Increasing Local Efficiency
+
+The environmental conditions in one area will trigger a local response independent from the condition of another site hundreds of miles away.
 
 ### The Traditional IT Cloud And Computing Model
 
 (Data Center/Cloud) <-> (Core Network) <-> (Endpoints)
 
-- **Data Center/Cloud**:
-- **Core Network**:
-- **Endpoints**:
+The Traditional IT Cloud Computing Model
+
+- **Data Center/Cloud**
+- **Core Network**
+- **Endpoints**
 
 ## Fog Computing
 
 (Data Center/Cloud) <-> (Core IPv6 Network) <-> (Fog Layer) <-> (Smart Objects)
 
-- Data Center/Cloud
-- Core IPv6 Network
-- Fog Layer
-- Smart Objects
+The best-known embodiment of edge services in **IoT** is **Fog Computing**. Any device with computing, storage, and network connectivity can be a fog node.
+
+Analyzing IoT data to where it is collected minimizes latency, offloads gigabytes of network traffic from the core network, and keeps sensitive data inside the local network.
+
+- **Data Center/Cloud**: (Hundreds) Data Center/Cloud, transactional response times
+- **Core IPv6 Network**: (Thousands) Backhaul
+- **Fog Layer**: (Tens Of Thousands) Multi-service Edge
+- **Smart Objects**: (Millions) Embedded Systems And Sensors, Low Power, Low Bandwidth
+
+## Edge Computing
+
+- In recent years, the concepts of IoT computing has been pushed even further to the edge, and in some cases, it now resides directly
+- Edge compute-capable meters are able to communicate with each other to share information on small subsets of the electrical distribution grid to monitor localized power quality and consumption
+- Models such as these help ensure the highest quality of power delivery to customers
