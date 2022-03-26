@@ -91,3 +91,159 @@ Use Apex if you want to,
 - Create complex business processes that are not supported by point and click automation
 - Create custom transactional logic (logic that occurs over the entire transaction, not just wit a single record or object)
 - Attach custom logic to another operation, such as saving a record, so that it occurs whenever the operation is executed, regardless of whether it originates in the user interface, a Visualforce page, or from SOAP API
+
+## Developing Code In The Cloud
+
+Apex cannot be used to,
+
+1. **Render Elements In The User Interface**: Other than error messages
+2. **Change Standard Functionality**: Apex can only prevent the functionality from happening, or add additional functionality
+3. Create temporary files
+4. Spawn threads
+
+You cannot render client side components with Apex. You need to use a standard of ES6 that Salesforce provides for building client side components.
+
+## switch Statements In Apex
+
+1. Apex provides a switch statement that tests whether an expression matches one of several values and branches acccordingly
+2. The whne value can be a single value, multiple values, or sObject types
+3. The swtich statement evaluates the expression and executes the code block
+4. Apex switch statements expression can be f the following types,
+   1. Integer
+   2. Long
+   3. sObject
+   4. String
+   5. Enum
+5. There is no fall-through
+
+## when and when else blocks
+
+1. VAlues ca take one of the following forms,
+   1. When literal {}
+   2. When sObjectType identifier {}
+   3. When enum_Value {}
+
+## sObject
+
+sObject -> {Account, Contract, MyCustomObject}
+
+sObject a = [Select ID From Account];
+sObject b = [Select ID From Contract];
+
+## Apex Classes
+
+1. As in Java, you can create classes in Apex
+2. A class is a template or blueprint from which objects are created. An object is an instance of a class
+3. All objects have state and behavior, that is, things that an oject knows about itself (class variables), and things that an object can do (class methods)
+4. A class can contain **variables** and **methods**
+5. **Variables** are used to specify the state of an object, such as the object's *Name* or *Type*. Since these variables are associated with a class and are members of it, they are commonly referred to as member variables
+6. **Methods** are used to control behavior, such as deleteLineItem or copyLineItems
+7. A class can contain other classes, called inner class
+8. An interface is like a class in which none of the methods have been implemented - the method signatures are there, but the body of each method is empty. To use an interface, another class must implement it by providing ...
+
+      ```apex
+      public class myOuterClass {
+         // Additional myOuterClass code here
+         class myInnerClass {
+            // myInnerClass code here
+         }
+      }
+      ```
+
+9. In Apx, you can define top-level classes (also called outer classes) as well as inner classes, that is, a class defined within another class. You can only have inner classes one level deep
+10. Avoid using standard object names for class names
+11. To define a class, specify the following,
+    1. Access Modifiers,
+       1. You must use one of the access modifiers (such as **public** or **global**) in the declaration of a top-level class
+       2. You do ot have to use an access modifier in the declaration of an inner class
+    2. Optional definition modifiers (such as virtual, abstract, and so on)
+    3. Required: The keyword class followed by the name of the class
+    4. Optional extensions and/or implementations
+
+      ```apex
+      private | public | global
+      [virtual | abstract | with sharing | without sharing]
+      class ClassName [implements InterfaceNameList] [extends ClassName]
+      {
+         // The body of the class
+      }
+      ```
+
+12. To declare a variable, specify the following,
+    1. Optional: Modifiers, such as public or final, as well as static
+    2. Required: The data type of the variable, such as String or Boolean
+    3. Required: the name of the variable
+    4. Optional: The value of the variable
+13. Use the following syntax when defining a variable,
+
+      ```apex
+      [public | private | protected | global] [final] [static] data_type variable_name [= value];
+      ```
+
+14. User-defined methods,
+    1. Can be used anywhere that system methods are used
+    2. Can be recursive
+    3. Can refer to themselves or to methods defined later in the same class or anonymous block. Forward declarations are applicable
+15. Passed Method Arguments,
+    1. In Apex, all primitive data type arguments, such as **Integer** or **String**, are passed into methods by value. This fact means that any changes to the arguments exist only within the scope of the method. When the method returns, the changes to the arguments are lost
+
+```apex
+// PassPrimitiveTypeExample
+// Primitive Data Type -> By Value
+// Non-Primitive Data Type -> By Ref
+
+public class PassPrimitiveTypeExample {
+   public static void debugStatusMessage() {
+      String msg = 'Original value';
+
+      processString(msg);
+
+      System.debug(msg);
+   }
+
+   public static void processString(String s) {
+      s = 'Modified value';
+   }
+}
+```
+
+```apex
+public class PassNonPrimitiveTypeExample {
+
+   public static void createTemperatureHistory() {
+
+   }
+
+   public stat void reference(List<Integer> m) {
+      m.add(70);
+      m.add(68);
+      m.add(75);
+      m.add(80);
+      m.add(82);
+   }
+
+   public static void referenceNew(List<Integer> m) {
+      // Assign argument to a new list of five temperature values
+      m = new List<Integer>{55, 59, 60, 62, 65};
+   }
+}
+```
+
+## Passing Method Arguments
+
+1. In Apex, all primitive data type arguments, such as Integer or String, are passed into methods by value. This fact means that any changes to the arguments exist only within the scope of the method. When the method returns, the changes to the arguments are lost
+
+## Data Modelling
+
+- Order Header,
+  - Ord #
+  - Ord Date
+- OrderLineItem,
+  - OrderID
+  - PrdID
+  - Qty
+  - UnitPrice
+
+## Using Constructors
+
+1. A constructor 
