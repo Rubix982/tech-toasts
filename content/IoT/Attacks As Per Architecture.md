@@ -39,7 +39,7 @@ metaDescription: "Attacks As Per Architecture"
 3. Network Layer,
    1. Routing protocol
    2. Address compromise
-4. Sensing/perception
+4. Sensing/Perception Layer
 
 ## Flooding By Attackers
 
@@ -67,7 +67,7 @@ Wormhole attack is very popular in ad hoc networks. The intruder just captures t
 
 ### Sinkhole Attack
 
-Sensors, which are left unattended in the network 
+Sensors, which are left unattended in the network.
 
 ### Sewage Pool Attack
 
