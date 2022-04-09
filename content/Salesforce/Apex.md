@@ -244,6 +244,90 @@ public class PassNonPrimitiveTypeExample {
   - Qty
   - UnitPrice
 
-## Using Constructors
+## Transactions
 
-1. A constructor 
+- An Apex transaction represents a set of operations that are executed as a single unit
+- All DML operations in a transaction either completely successfully, or if an error occurs in one operation, the entire transaction is rolled back and no data is committed to the database
+- The boundary of a transaction can be a trigger, a class method, an anonymous block of code, a Visualforce page, or a custom Web Service method
+- An Apex transaction is sometimes referred to as an execution context. Both terms refer to the same thing
+
+### How Are Transactions Useful
+
+- Transactions are useful when several operations are related, and either all of none of the operations should be committed. This keeps the database in a consistent state
+- There are meany business scenarios that benefit from transaction processing. For example, transferring funds from one ank account to another is a common scenario. It involves debiting the first account and crediting the second account with th amount to transfer. These two operations need to be committed together to thr database. But if the debit operation succeeds and the credit operation fails, the account balances will be inconsistent.
+- Let's have a look at an example that shows how all DML insert operations in a method are rolled back when the last operation causes a validation rule failure
+
+```apex
+public class AccountsOperation {
+
+   public static void createAccountAndContact(string accountName, string contactFirstName, string contactLastName) {
+      Account acc = new Account (Name = accountName);
+
+      insert acc;
+
+      Contact con = new Contact(FirstName = contactFirstName,
+                                 LastName = contactLastName,
+                                 AccountId = acc.id);
+
+      insert con;
+   }
+}
+```
+
+To call the above code,
+
+```apex
+AccountsOperation.createAccountAndContact("Hello World Corp", "Saif", "Ul Islam");
+```
+
+To make the above code fail,
+
+```apex
+AccountsOperation.createAccountAndContact("XYZ Corp", "Saif", "");
+```
+
+All statements will be rolled back wherever a mistake occurs.
+
+## Asynchronous Apex
+
+- Apex offers multiple ways for running our Apex code asynchronously. Here are different asynchronous Apex features and when to use each,
+  - **Scheduled Apex**, (interfaces provided by Salesforce)
+    - To schedule an Apex class to run on a specific schedule
+  - **Batch Apex**, (interfaces provided by Salesforce)
+    - For long-running jobs with large data volume that need to be performed in baches, such as database maintenance jobs
+    - For jobs that need larger query results than regular transactions allow
+  - **Future Methods**, (annotation must be used)
+    - When you have a long-running method and need to prevent delaying an Apex transaction
+    - When you make call-outs to external Web services
+    - To segregate DML operations and bypass the mixed save DML error
+  - **Queue-able Apex**, (interfaces provided by Salesforce)
+    - To start a long-running operation and get an ID for it
+    - To pass complex types to a job
+    - To chain jobs
+
+### Scheduled Apex
+
+- To schedule an Apex class to run at regular intervals, first write an Apex class that implements the Salesforce-provided interface **Schedulable**
+- You can specify the schedule using either the Schedule Apex page in the Salesforce setup user interface, or the System.schedule method
+- Salesforce schedules the class for execution at the specified time. Actual execution can be delayed based on service availability
+- The scheduler runs as system - all classes are executed, whether the user has permission to execute the class or not (WITHOUT SHARING)
+- To monitor or stop the execution of a scheduled Apex job using the Salesforce user interface from Setup, enter Scheduled Jobs in the Quick Find box
+- The **Schedulable** interface contains one method that must be implemented called **execute**, `global void execute (SchedulableContext sc) {}`
+- The implemented `execute` method must be declared as global or public
+- Use the `execute` method to instantiate the class you want to schedule
+
+```apex
+global class scheduledMerge implements Schedulable {
+   global void execute(SchedulableContext sc) {
+      mergeNumbers M = new mergeNumbers();
+   }
+}
+```
+
+- Though it's possible to do additional processing in the execute method, Salesforce recommend that all processing take place in a separate class
+
+### Batch Apex
+
+### Future Methods
+
+### Queue-Able Apex
