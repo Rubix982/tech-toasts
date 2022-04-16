@@ -330,4 +330,11 @@ global class scheduledMerge implements Schedulable {
 
 ### Future Methods
 
+- A future method runs in the background, asynchronously
+- AYou can call a future method for executing long-running operations, such as call-outs to external Web services or any operation you'd like to run in its own thread, on its own time
+- Each future method is queued and executes when system resources become available. That way, the execution of your code doesn't have to wait for the completion of a long-running operation
+- A benefit of using future method is that some governor limits are higher for asynchronous apex, such as SQOL query limits and heap size limits
+- The calling method cannot track if the future method started, stopped, when it stated, when it will end. You can only call with the calling method
+- There are no such methods such as
+
 ### Queue-Able Apex
