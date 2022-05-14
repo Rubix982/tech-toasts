@@ -11,3 +11,15 @@ metaDescription: "Kanban"
 - Many agile principles are similar
 
 Taiichi Ohno - Toyota Production System, Beyond Large Scale Production
+
+## Kanban: Six Principles
+
+- Visualize: Work & Workflow
+- Limit WIP: Limit Work In Progress
+- Manage Flow: Avoid Stackups Encourage Collaboration
+- Be Explicit: Make Policies Explicit (But Not Permanent)
+  - 
+- Feedback: Implement Feedback Loops
+- Improve, Evolve: Improve Collaboratively, Evolve Experimentally
+
+
